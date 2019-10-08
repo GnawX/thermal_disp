@@ -177,7 +177,17 @@ class ThermalDisplacements(ThermalMotion):
                     self._projection_direction).reshape(-1, len(masses))
                 vecs2 = np.abs(p_vecs) ** 2 / masses
             else:
-                vecs2 = (abs(vecs) ** 2).T / masses
+                #vecs2 = (abs(vecs) ** 2).T / masses
+                nbranch = len(vecs) -3
+                s1 = [0,0,0] + [(-1.0)**i for i in range(nbranch)]
+                s2 = [0,0,0] + [(-1.0)**i for i in range(nbranch/2)] \
+                     + [(-1.0)**(i+1) for i in range(nbranch - nbranch/2)]
+                s1 = np.array(s1)
+                s2 = np.array(s2)
+                s3 = -s1
+                s4 = -s2
+                s = s1
+                vecs2 = np.multiply(vecs,s).T / masses
 
             valid_indices = fs > self._fmin
             if self._fmax is not None:
