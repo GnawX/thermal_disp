@@ -217,7 +217,7 @@ class ThermalDisplacements(ThermalMotion):
             for i, elems in enumerate(np.reshape(u, (natom, -1))):
                 text = "  - [ %10.7f" % elems[0]
                 for j in range(len(elems) - 1):
-                    text += ", %10.7f" % elems[j + 1]
+                    text += " %10.7f" % elems[j + 1]
                 text += " ] # atom %d" % (i + 1)
                 lines.append(text)
 
